@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot ConnectionSetup Setup 1`] = `
+<RCTScrollView
+  contentInset={
+    Object {
+      "bottom": 0,
+    }
+  }
+  getTextInputRefs={[Function]}
+  onContentSizeChange={[Function]}
+  onLayout={[Function]}
+  onScroll={[Function]}
+  scrollEventThrottle={200}
+  scrollToBottomOnKBShow={false}
+  scrollToInputAdditionalOffset={75}
+  startScrolledToBottom={false}
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      Object {
+        "backgroundColor": "#b3e6ff",
+      },
+    ]
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "height": 200,
+          "justifyContent": "center",
+          "paddingTop": 20,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../Resources/red_cloud.jpeg",
+          }
+        }
+        style={
+          Object {
+            "height": "70%",
+            "width": "50%",
+          }
+        }
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "red",
+            "fontWeight": "bold",
+            "paddingBottom": 5,
+          }
+        }
+      >
+        Username
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        autoCorrect={false}
+        editable={true}
+        keyboardType="default"
+        onChangeText={[Function]}
+        placeholder="Login"
+        secureTextEntry={false}
+        style={
+          Object {
+            "alignContent": "center",
+            "backgroundColor": "white",
+            "borderColor": "black",
+            "borderWidth": 1,
+            "height": 40,
+            "justifyContent": "center",
+            "paddingBottom": 10,
+            "width": "50%",
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "red",
+            "fontWeight": "bold",
+            "paddingBottom": 5,
+          }
+        }
+      >
+        Password
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        autoCorrect={false}
+        editable={true}
+        keyboardType="default"
+        onChangeText={[Function]}
+        placeholder="Password"
+        secureTextEntry={true}
+        style={
+          Object {
+            "alignContent": "center",
+            "backgroundColor": "white",
+            "borderColor": "black",
+            "borderWidth": 1,
+            "height": 40,
+            "justifyContent": "center",
+            "paddingBottom": 10,
+            "width": "50%",
+          }
+        }
+        underlineColorAndroid="transparent"
+      />
+    </View>
+    <Text />
+    <View
+      accessibilityRole="button"
+      accessibilityStates={
+        Array [
+          "disabled",
+        ]
+      }
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+            Object {},
+          ]
+        }
+      >
+        <Text
+          disabled={true}
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "red",
+              },
+              Object {
+                "color": "#cdcdcd",
+              },
+            ]
+          }
+        >
+          Login
+        </Text>
+      </View>
+    </View>
+    <Text
+      style={
+        Object {
+          "color": "red",
+          "height": 200,
+          "textAlign": "center",
+        }
+      }
+    >
+      
+    </Text>
+    <View
+      accessibilityRole="button"
+      accessibilityStates={Array []}
+      accessible={true}
+      isTVSelectable={true}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#007AFF",
+                "fontSize": 18,
+                "padding": 8,
+                "textAlign": "center",
+              },
+              Object {
+                "color": "blue",
+              },
+            ]
+          }
+        >
+          Register a new account
+        </Text>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

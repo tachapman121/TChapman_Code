@@ -1,0 +1,1 @@
+git submodule update && ./buildlibs.sh && cmake . && make && ./EducationalAppServer

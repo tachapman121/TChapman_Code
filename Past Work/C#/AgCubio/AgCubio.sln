@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgCubioGUI", "AgCubioGUI\AgCubioGUI.csproj", "{65E126E5-3E8E-459A-8BDA-B7C8B7FA4AAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgCubio", "Cube\AgCubio.csproj", "{9DFC6154-6065-46EA-9356-F9D13CB30CB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network_Controller", "Network_Controller\Network_Controller.csproj", "{E82762E0-C120-4FA7-873F-82659CC0B486}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{7706BDDC-C65F-408E-8B99-DD0FF52395ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelTests", "ModelTests\ModelTests.csproj", "{25B29B87-F71E-4586-B99A-200FCD00EAE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A2AFA22B-3078-4EE2-A2C1-2DE66E5ABBDE}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgCubioServer", "AgCubioServer\AgCubioServer.csproj", "{0BD82899-26A7-4621-BEA4-CC81DBB86E78}"
+EndProject
+Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{65E126E5-3E8E-459A-8BDA-B7C8B7FA4AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E126E5-3E8E-459A-8BDA-B7C8B7FA4AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E126E5-3E8E-459A-8BDA-B7C8B7FA4AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E126E5-3E8E-459A-8BDA-B7C8B7FA4AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFC6154-6065-46EA-9356-F9D13CB30CB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFC6154-6065-46EA-9356-F9D13CB30CB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFC6154-6065-46EA-9356-F9D13CB30CB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFC6154-6065-46EA-9356-F9D13CB30CB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E82762E0-C120-4FA7-873F-82659CC0B486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82762E0-C120-4FA7-873F-82659CC0B486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82762E0-C120-4FA7-873F-82659CC0B486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E82762E0-C120-4FA7-873F-82659CC0B486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7706BDDC-C65F-408E-8B99-DD0FF52395ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7706BDDC-C65F-408E-8B99-DD0FF52395ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7706BDDC-C65F-408E-8B99-DD0FF52395ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25B29B87-F71E-4586-B99A-200FCD00EAE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25B29B87-F71E-4586-B99A-200FCD00EAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25B29B87-F71E-4586-B99A-200FCD00EAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25B29B87-F71E-4586-B99A-200FCD00EAE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BD82899-26A7-4621-BEA4-CC81DBB86E78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BD82899-26A7-4621-BEA4-CC81DBB86E78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BD82899-26A7-4621-BEA4-CC81DBB86E78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BD82899-26A7-4621-BEA4-CC81DBB86E78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en" mlns="http://www.w3.org/1999/xhtml">
+  <head>
+      <meta charset="utf-8" />
+      <title>AgCubio Scores</title>
+  </head>
+
+  <body>
+      <h1>An Error Has Occured</h1>
+		<p> The request entered could not be processed because it is not a valid address. Valid requests are: </p>
+		<p><a href="/scores">Scores</a> - Show all games played on AgCubio</p>
+		<p><a href="/games?player=Example">Player Scores</a> - Shows all games and statistics by the player. Commands should be specified 
+		by adding /games?player=<i>playername</i> to the end of the URL</p>
+		<p><a href="/eaten?id=86">Players Eaten</a> - Shows all statistics and players eaten, along with links to their stats, for a specific 
+		game ID. Commands should be entered by adding /eaten?id=<i>Game_ID</i> to the end of the URL</p>
+  </body>
+
+</html>

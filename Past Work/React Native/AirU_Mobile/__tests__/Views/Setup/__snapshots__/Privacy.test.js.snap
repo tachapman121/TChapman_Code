@@ -1,0 +1,216 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot ConnectionSetup Setup 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "flexDirection": "column",
+      "height": "80%",
+      "justifyContent": "space-between",
+      "paddingTop": 30,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 5,
+          "flexDirection": "column",
+          "padding": 40,
+        },
+        Object {
+          "flex": 1,
+          "paddingTop": 30,
+        },
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../Resources/Setup_Privacy.png",
+        }
+      }
+      style={
+        Object {
+          "height": "100%",
+          "width": "140%",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "center",
+        "flex": 5,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      Your sensor has been successfully connected! Would you like to make your sensor visable publically?
+    </Text>
+    <Text
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      This will allow people to view your sensor's location on a map and for researchers to directly use and access its data.
+    </Text>
+    <Text />
+    <Image
+      source={
+        Object {
+          "testUri": "../../../Resources/SensorPrivacy.png",
+        }
+      }
+      style={
+        Object {
+          "alignContent": "center",
+          "flex": 4,
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flex": 100,
+          "flexDirection": "column",
+          "justifyContent": "space-evenly",
+        },
+        Object {
+          "flex": 5,
+        },
+      ]
+    }
+  >
+    <TouchableHighlight
+      activeOpacity={0.85}
+      delayPressOut={100}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "red",
+          "borderColor": "black",
+          "borderWidth": 2,
+          "height": 50,
+          "justifyContent": "space-evenly",
+          "padding": 1,
+          "width": 150,
+        }
+      }
+      testID="setPrivacyTrue"
+      underlayColor="black"
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Allow
+      </Text>
+    </TouchableHighlight>
+    <TouchableHighlight
+      activeOpacity={0.85}
+      delayPressOut={100}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "red",
+          "borderColor": "black",
+          "borderWidth": 2,
+          "height": 50,
+          "justifyContent": "space-evenly",
+          "padding": 1,
+          "width": 150,
+        }
+      }
+      testID="setPrivacyFalse"
+      underlayColor="black"
+    >
+      <Text
+        style={
+          Object {
+            "color": "white",
+            "fontWeight": "bold",
+          }
+        }
+      >
+        Deny
+      </Text>
+    </TouchableHighlight>
+  </View>
+  <View
+    style={
+      Object {
+        "alignContent": "space-between",
+        "flexDirection": "row",
+        "height": 60,
+        "justifyContent": "flex-end",
+        "width": "100%",
+      }
+    }
+  >
+    <TouchableHighlight
+      activeOpacity={30}
+      delayPressOut={100}
+      onPress={[Function]}
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "backgroundColor": "transparent",
+          "borderColor": "black",
+          "flex": 1,
+          "justifyContent": "flex-start",
+          "padding": 10,
+        }
+      }
+      testID="prevButton"
+      underlayColor="yellow"
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 40,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </TouchableHighlight>
+  </View>
+</View>
+`;

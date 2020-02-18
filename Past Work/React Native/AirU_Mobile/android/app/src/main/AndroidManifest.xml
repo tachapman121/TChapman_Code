@@ -1,0 +1,54 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.airu_mobile">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+    <uses-sdk android:minSdkVersion="18"/>
+
+    <application
+      android:name=".MainApplication"
+      android:label="@string/app_name"
+      android:icon="@mipmap/ic_launcher"
+      android:allowBackup="false"
+      android:theme="@style/AppTheme"
+      android:screenOrientation="portrait">
+<!-- Set color used with incoming notification messages. This is used when no color is set for the incoming notification message. -->
+      <meta-data  android:name="com.dieam.reactnativepushnotification.notification_channel_name"
+                android:value="YOUR NOTIFICATION CHANNEL NAME"/>
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_channel_description"
+                    android:value="YOUR NOTIFICATION CHANNEL DESCRIPTION"/>
+        <!-- Change the resource name to your App's accent color - or any other color you want -->
+        <meta-data  android:name="com.dieam.reactnativepushnotification.notification_color"
+                    android:resource="@android:color/white"/>
+                    <service
+            android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationListenerService"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+      <activity
+        android:name=".MainActivity"
+        android:label="@string/app_name"
+        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+        android:windowSoftInputMode="adjustResize"
+        android:screenOrientation="portrait">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+      </activity>
+      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+      <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyAMGLLKruE9Jbg99qqwU5j9B1B5WeJ2G6s"/>
+    </application>
+
+</manifest>
