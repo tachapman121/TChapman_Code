@@ -1,4 +1,4 @@
-﻿// Trevor Chapman, Xiaoyun Ding
+// Trevor Chapman, Xiaoyun Ding
 // PS9
 // 12/10/2015
 // version 1.0
@@ -35,7 +35,7 @@ namespace AgCubioServer
         private Dictionary<int, Socket> UIDToSocket;
         private const string errorPagePath = @"..\..\..\Resources\ErrorPage.txt";
 
-        public const string connectionString = "server=atr.eng.utah.edu;database=cs3500_trevorc;uid=cs3500_trevorc;password='P@ssw0rd'";
+        public const string connectionString = ""; // connString goes here
 
         static void Main(string[] args)
         {
