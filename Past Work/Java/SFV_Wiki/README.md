@@ -1,0 +1,1 @@
+Personal project for auto generating character templates for use in Shoryuken.com's Street Fighter V wiki  http://wiki.shoryuken.com/Street_Fighter_V . Optionally can read in JSON files created by https://github.com/D4RKONION/fatsfvframedatajson to parse and generate Frame Data table and values.
