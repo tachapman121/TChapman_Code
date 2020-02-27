@@ -22,7 +22,7 @@ def getChallongeStats(username, api, challongeURL):
         name = participant["username"]
         id = participant["id"]
         points = __givePoints(rank, pointList)
-        stats[id] = ({'rank': rank, 'name': name, 'points': points, 'wins': 0, 'loss': 0, 'winPercentage': 0})
+        stats[id] = ({'rank': rank, 'name': name, 'points': points, 'wins': 0, 'losses': 0, 'gameWins': 0, 'gameLosses': 0, 'winPercentage': 0, 'lostTo': []})
 
     for match in matches:
         p1 = match["player1-id"]
@@ -35,13 +35,23 @@ def getChallongeStats(username, api, challongeURL):
         p2Stats = stats[p2]
 
         # if score is 2-1, p1 won 2 and lost 1; update stats
-        p1Stats["wins"] += int(score[0])
-        p2Stats["wins"] += int(score[1])
-        p1Stats["loss"] += int(score[1])
-        p2Stats["loss"] += int(score[0])
+        p1Stats["gameWins"] += int(score[0])
+        p2Stats["gameWins"] += int(score[1])
+        p1Stats["gameLosses"] += int(score[1])
+        p2Stats["gameLosses"] += int(score[0])
+
+        # update set win/losses and who lost to
+        if score[0] > score[1]:
+            p1Stats['wins'] += 1
+            p2Stats['losses'] += 1
+            p2Stats['lostTo'].append(p1Stats['name'])
+        else:
+            p1Stats['losses'] += 1
+            p2Stats['wins'] += 1
+            p1Stats['lostTo'].append(p2Stats['name'])
         
-        p1Stats["winPercentage"] = round((p1Stats["wins"] / (p1Stats["wins"] + p1Stats["loss"])), 3)
-        p2Stats["winPercentage"] = round((p2Stats["wins"] / (p2Stats["wins"] + p2Stats["loss"])), 3)
+        p1Stats["winPercentage"] = round((p1Stats["wins"] / (p1Stats["wins"] + p1Stats["losses"])), 2)
+        p2Stats["winPercentage"] = round((p2Stats["wins"] / (p2Stats["wins"] + p2Stats["losses"])), 2)
     
     print(stats)
     return stats

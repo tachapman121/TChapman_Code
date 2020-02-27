@@ -18,24 +18,35 @@ def update(challongeStats, googleURL):
 
     # loop through and append to values
     values = []
-    values.append(["Name", "Rank", "Points", "Wins", "Losses", "Win%"])
+    values.append(["Name", "Placement", "Points", "Set Wins", "Set Losses", "Win%", "GameWins", "GameLosses", "Lost To"])
     for key in challongeStats:
         stats = []
         stats.append(challongeStats[key]['name'])
         stats.append(challongeStats[key]['rank'])
         stats.append(challongeStats[key]['points'])
         stats.append(challongeStats[key]['wins'])
-        stats.append(challongeStats[key]['loss'])
+        stats.append(challongeStats[key]['losses'])
         stats.append(challongeStats[key]['winPercentage'])
+        stats.append(challongeStats[key]['gameWins'])
+        stats.append(challongeStats[key]['gameLosses'])
+        lostTo = ''
+        for loss in challongeStats[key]['lostTo']:
+            lostTo += loss + ','
+
+        stats.append(lostTo)
         values.append(stats)
 
-    print(stats)
+    # print(stats)
 
     # setup request and update sheet
     ranges = dt_title + "!A1:ZZ5"
     body = {'majorDimension': 'ROWS', 'values': values}
     results = sheet.values().append(spreadsheetId=googleURL, valueInputOption='RAW', insertDataOption='OVERWRITE',  range=ranges, body=body).execute()
-    print(results)
+    # print(results)
+
+    # add any additional styling if needed
+    __style(sheet, googleURL, dt_title)
+
 
 # Example taken from Google Sheet API docs
 # NOTE: REQUIRES ENABLING GOOGLES SHEETS API. TO DO SO
@@ -61,8 +72,14 @@ def __authorize():
 
     return creds
 
+def __style(sheet, googleURL, dt_title):
+    # sort based on placement
+    return
+
 # for testing, doesn't supply results if run as __main__
 if(__name__ == '__main__'):
+    main()
+def main():
     import configparser
     config = configparser.ConfigParser()
     config.read("./config.ini")
