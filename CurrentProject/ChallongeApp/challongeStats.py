@@ -43,7 +43,7 @@ def getChallongeStats(username, api, challongeURL):
         p1Stats["winPercentage"] = round((p1Stats["wins"] / (p1Stats["wins"] + p1Stats["loss"])), 3)
         p2Stats["winPercentage"] = round((p2Stats["wins"] / (p2Stats["wins"] + p2Stats["loss"])), 3)
     
-    # print(stats)
+    print(stats)
     return stats
 
 # param: Number of particiapnts (int)
@@ -105,3 +105,16 @@ def __givePoints(rank, points):
         return points[14]
     else:
         return 0
+
+if (__name__ == '__main__'):
+    main()
+
+def main():
+    import configparser
+    config = configparser.ConfigParser()
+    config.read("./config.ini")
+    username=config.get('SectionOne', 'username')
+    api = config.get('SectionOne', 'api_key')
+    challongeURL = config.get('SectionOne', 'challongeURL')
+    return getChallongeStats(username, api, challongeURL)
+    

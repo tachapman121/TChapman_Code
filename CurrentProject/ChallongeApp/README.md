@@ -21,7 +21,3 @@ Uses pyChallonge library created at https://github.com/russ-/pychallonge
 
 
 For accessing Google Sheets, this uses OAuth2 and requires installing additional libraries, in addition to enabling Google Sheets API access and giving this app access. For more information, see the Google API Docs at https://developers.google.com/sheets/api/quickstart/python
-
-
-v0.1: Challonge support implemented, Google Sheet TBD.
-v0.2: Google Sheets authentication, can pull sheet

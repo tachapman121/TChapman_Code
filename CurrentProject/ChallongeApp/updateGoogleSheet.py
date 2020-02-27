@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta 
 import os.path
 import pickle
 from googleapiclient.discovery import build
@@ -8,9 +9,33 @@ def update(challongeStats, googleURL):
     creds = __authorize()
     service = build('sheets', 'v4', credentials=creds)
     sheet = service.spreadsheets()
-    results = sheet.values().get(spreadsheetId=googleURL, range='A1:B2').execute()
-    print(results)
+            
+    # add new worksheet (tab) with currentDate-1 as title in mm-dd format
+    dt_title = (datetime.today() - timedelta(1)).strftime("%m-%d")
+    requests = [{'addSheet': {'properties': {'title': dt_title}}}]
+    body = {'requests': requests}
+    res = sheet.batchUpdate(spreadsheetId=googleURL, body=body).execute()
 
+    # loop through and append to values
+    values = []
+    values.append(["Name", "Rank", "Points", "Wins", "Losses", "Win%"])
+    for key in challongeStats:
+        stats = []
+        stats.append(challongeStats[key]['name'])
+        stats.append(challongeStats[key]['rank'])
+        stats.append(challongeStats[key]['points'])
+        stats.append(challongeStats[key]['wins'])
+        stats.append(challongeStats[key]['loss'])
+        stats.append(challongeStats[key]['winPercentage'])
+        values.append(stats)
+
+    print(stats)
+
+    # setup request and update sheet
+    ranges = dt_title + "!A1:ZZ5"
+    body = {'majorDimension': 'ROWS', 'values': values}
+    results = sheet.values().append(spreadsheetId=googleURL, valueInputOption='RAW', insertDataOption='OVERWRITE',  range=ranges, body=body).execute()
+    print(results)
 
 # Example taken from Google Sheet API docs
 # NOTE: REQUIRES ENABLING GOOGLES SHEETS API. TO DO SO
@@ -35,3 +60,11 @@ def __authorize():
             pickle.dump(creds, token)
 
     return creds
+
+# for testing, doesn't supply results if run as __main__
+if(__name__ == '__main__'):
+    import configparser
+    config = configparser.ConfigParser()
+    config.read("./config.ini")
+    googleURL = config.get('SectionOne', 'googleURL')    
+    update(None, googleURL)
