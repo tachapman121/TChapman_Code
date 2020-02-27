@@ -1,4 +1,7 @@
-*.ini
 challonge/*
 .DS_Store
 __pycache__/*
+credentials.json
+token.pickle
+*~
+config.*

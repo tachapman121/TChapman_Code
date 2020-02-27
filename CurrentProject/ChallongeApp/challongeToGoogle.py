@@ -1,7 +1,7 @@
 import challonge
 import configparser
 import challongeStats
-import updateGoogleDoc
+import updateGoogleSheet
 
 def main():
     # Read from ./config.ini for parameters
@@ -15,7 +15,7 @@ def main():
     __checkVariables(username, api, challongeURL, googleURL)
     results = challongeStats.getChallongeStats(username, api, challongeURL)
     print("Successfully got Challonge Results")
-    updateGoogleDoc.updateDoc(results, googleURL)
+    updateGoogleSheet.update(results, googleURL)
     print("Successfully updated Google Doc at " + googleURL)
 
 def __checkVariables(username, api_key, challongeURL, googleURL):

@@ -43,7 +43,7 @@ def getChallongeStats(username, api, challongeURL):
         p1Stats["winPercentage"] = round((p1Stats["wins"] / (p1Stats["wins"] + p1Stats["loss"])), 3)
         p2Stats["winPercentage"] = round((p2Stats["wins"] / (p2Stats["wins"] + p2Stats["loss"])), 3)
     
-    print(stats)
+    # print(stats)
     return stats
 
 # param: Number of particiapnts (int)
