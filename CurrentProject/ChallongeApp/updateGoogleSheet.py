@@ -15,6 +15,10 @@ def update(challongeStats, googleURL):
     requests = [{'addSheet': {'properties': {'title': dt_title}}}]
     body = {'requests': requests}
     res = sheet.batchUpdate(spreadsheetId=googleURL, body=body).execute()
+    sheetId = res['replies'][0]
+    sheetId = sheetId['addSheet']['properties']['sheetId']
+
+    # print(res)
 
     # loop through and append to values
     values = []
@@ -45,7 +49,7 @@ def update(challongeStats, googleURL):
     # print(results)
 
     # add any additional styling if needed
-    __style(sheet, googleURL, dt_title)
+    __style(sheet, googleURL, sheetId)
 
 
 # Example taken from Google Sheet API docs
@@ -72,8 +76,35 @@ def __authorize():
 
     return creds
 
-def __style(sheet, googleURL, dt_title):
-    # sort based on placement
+def __style(sheet, googleURL, sheetId):
+    requests = []
+    
+    # sort spreadsheet by point values
+    request = {
+        "sortRange": {
+            "range": {
+                "sheetId": sheetId, 
+                "startRowIndex": 1, #ignore header
+                "endRowIndex": 200,
+                "startColumnIndex": 0, 
+                "endColumnIndex": 10
+                }, 
+            "sortSpecs": [{
+                    "dimensionIndex": 1, # assumes points is second column
+                    "sortOrder": "ASCENDING"
+                    }, {
+                    "dimensionIndex": 0, # name, 
+                    "sortOrder": "ASCENDING"
+                    }]
+            }
+        }
+
+    requests.append(request)
+
+    #repeat as needed...
+
+    body = {"requests": requests}
+    sheet.batchUpdate(spreadsheetId=googleURL, body=body).execute()
     return
 
 # for testing, doesn't supply results if run as __main__
