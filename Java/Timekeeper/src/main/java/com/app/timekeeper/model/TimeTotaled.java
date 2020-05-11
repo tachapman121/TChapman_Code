@@ -4,19 +4,19 @@ package com.app.timekeeper.model;
  * Used for returning data for totalTime queries
  */
 public class TimeTotaled {
-	private String _id;
-	private int totalTime;
+	private String id;
+	private float totalTime;
 	
-	public TimeTotaled(String _id, int totalTime) {
-		this._id = _id;
+	public TimeTotaled(String id, float totalTime) {
+		this.id = id;
 		this.totalTime = totalTime;
 	}
 	
 	public String getId() {
-		return _id;
+		return id;
 	}
 	
-	public int getTotalTime() {
+	public float getTotalTime() {
 		return totalTime;
 	}
 }

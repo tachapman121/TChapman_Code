@@ -59,16 +59,22 @@ public class TimeEntityController {
 	}
 	
 	/**
-	 * Creates a new time entity for given entity name. The entity must already exist in the database
+	 * Creates a new time entity for given entity name. The entity must already exist in the database, and time must be > 0
 	 * @param name Name of entity
 	 * @param hours Number of hours to add
 	 * @return
 	 */
-	@PostMapping(path="/time", consumes="application/json")
-	public ResponseEntity<String> addTime(@RequestBody String name, float hours) {
+	@PostMapping(path="/timeByName", consumes="application/json")
+	public ResponseEntity<String> addTimeName(@RequestBody TimeTotaled time) {
+		// checks
+		if (time == null || time.getId() == null)
+			return new ResponseEntity<String>("id and totalTime required", HttpStatus.BAD_REQUEST);
+		if (time.getTotalTime() <= 0)
+			return new ResponseEntity<String>("totalTime must be > 0", HttpStatus.BAD_REQUEST);
+		
 		try {
-			service.addTime(name, hours);
-			return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+			service.addTime(time.getId(), time.getTotalTime());
+			return new ResponseEntity<String>(HttpStatus.CREATED);
 		} catch(Exception e) {
 			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -78,14 +84,19 @@ public class TimeEntityController {
 	 * Creates a new time entity for given entity name. The entity must already exist in the database
 	 * @param id ObjectId of entity
 	 * @param hours Number of hours to add
-	 * @return
+	 * @return 400 if bad request along with error message, 201 if completed successfully
 	 */
 	// Takes ObjectID
-	@PostMapping(path="/time", consumes="application/json")
-	public ResponseEntity<String> addTime(@RequestBody Long id, float hours) {
+	@PostMapping(path="/timeById", consumes="application/json")
+	public ResponseEntity<String> addTimeId(@RequestBody TimeTotaled time) {
+		// checks
+		if (time == null || time.getId() == null)
+			return new ResponseEntity<String>("id and totalTime required", HttpStatus.BAD_REQUEST);
+		if (time.getTotalTime() <= 0)
+			return new ResponseEntity<String>("totalTime must be > 0", HttpStatus.BAD_REQUEST);
 		try {
-			service.addTime(id, hours);
-			return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+			service.addTime(time.getId(), time.getTotalTime());
+			return new ResponseEntity<String>(HttpStatus.CREATED);
 		} catch(Exception e) {
 			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -94,7 +105,7 @@ public class TimeEntityController {
 	/**
 	 * Adds new entity to database
 	 * @param entity TimeEntity to add containing name and type
-	 * @return
+	 * @return 400 if bad request along with error message, 201 if completed successfully
 	 */
 	@PostMapping(path="/entity", consumes="application/json")
 	public ResponseEntity<String> addEntity(@RequestBody TimeEntity entity) {
@@ -102,7 +113,7 @@ public class TimeEntityController {
 			return new ResponseEntity<String>("Name and Type required", HttpStatus.BAD_REQUEST);
 		try {
 			service.addEntity(entity);
-			return new ResponseEntity<String>(HttpStatus.ACCEPTED);
+			return new ResponseEntity<String>(HttpStatus.CREATED);
 		} catch(Exception e) {
 			return new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

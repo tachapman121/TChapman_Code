@@ -1,5 +1,8 @@
 package com.app.timekeeper.service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.UnwindOperation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -17,7 +19,6 @@ import com.app.timekeeper.model.Time;
 import com.app.timekeeper.model.TimeEntity;
 import com.app.timekeeper.model.TimeTotaled;
 import com.app.timekeeper.repository.EntityRepository;
-import com.mongodb.client.model.Field;
 
 @Service
 public class TimeEntityServiceImpl implements TimeEntityService {
@@ -93,9 +94,13 @@ public class TimeEntityServiceImpl implements TimeEntityService {
 
 	@Override
 	public List<TimeTotaled> timeForWeek() {
-		// unwind array then group summation
+		// get closest previous Sunday
+		LocalDate prevSunday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+		
+		// unwind array, get records >= previous Sunday, and group for total
 		Aggregation aggregate = Aggregation.newAggregation(
 				Aggregation.unwind("times"), 
+				Aggregation.match(Criteria.where("times.addDate").gte(prevSunday)), 
 				Aggregation.group("name").sum("times.time").as("totalTime"));
 		
 		AggregationResults<TimeTotaled> results = mongoTemplate.aggregate(aggregate, TimeEntity.class, TimeTotaled.class);

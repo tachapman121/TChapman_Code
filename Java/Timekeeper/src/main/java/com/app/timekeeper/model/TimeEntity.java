@@ -12,8 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.Data;
-
 /**
  * Represents entity in database and associated times
  */
@@ -70,7 +68,7 @@ public class TimeEntity {
 		this.times = times;
 	}
 	
-	private TimeEntity() {
+	public TimeEntity() {
 		this.firstDate = new Date();
 		times = new ArrayList<Time>();
 	}
