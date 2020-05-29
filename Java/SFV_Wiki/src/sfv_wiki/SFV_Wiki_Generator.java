@@ -11,13 +11,13 @@ import java.util.Scanner;
 public class SFV_Wiki_Generator 
 {
 	private static String data;
-	private final static String character = "Sagat"; // if does not exist in JSON, will fail
-	private final static String discordLink = "tXa4PdV";
-	private final static String playersToWatch = "Bonchan";
-	private final static String overheads = "f+HP";
+	private final static String character = "Zeku (Young)"; // if does not exist in JSON, will fail
+	private final static String discordLink = "QV77zFs";
+	private final static String playersToWatch = "iDom";
+	private final static String overheads = "f+MP, hcf+KK";
 	private final static String lows = "crLK, crMK, crHK";
-	private final static String HKD = "crHK (CH)";
-	private final static String CCs = "HP, HK, f+HK, crHP, crHK";
+	private final static String HKD = "crHK (CH), Misogi" ;
+	private final static String CCs = "f+HP, Senha Kassatsu, crHK"; // crush counters
 	
 	/**
 	 * Main function to run and build character wiki
@@ -43,17 +43,17 @@ public class SFV_Wiki_Generator
 		// build wiki; comment out sections don't want/need
 		String wiki = "";
 		
-		wiki += Header();
-		wiki += stats();
-		//wiki += summary();
-		//wiki += changes();
-		//wiki += moveList();
-		//wiki += discussions();
+//		wiki += Header();
+//		wiki += stats();
+//		wiki += summary();
+//		wiki += changes();
+//		wiki += moveList();
+//		wiki += discussions();
 		wiki += frameData();
-		//wiki += combos();
-		//wiki += vSystem();
-		//wiki += strategy(); 
-		//wiki += category();
+//		wiki += combos();
+//		wiki += vSystem();
+//		wiki += strategy(); 
+//		wiki += category();
 		
 		// output final result
 		System.out.println(wiki);
@@ -165,10 +165,11 @@ public class SFV_Wiki_Generator
 		String wiki = "";
 		// V-System
 		wiki += "{{SFVCharacterVSystem\n" +
-				"|\n" + 
-				"|\n" +
-				"|\n" +
-				"|\n" +
+				"|\n" + // vr
+				"|\n" + // vs1
+				"|\n" + // vs2
+				"|\n" + // vt1
+				"|\n" + // vt2
 				"}}\n";
 		
 		return wiki;

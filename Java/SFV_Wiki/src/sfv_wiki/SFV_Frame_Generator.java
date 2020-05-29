@@ -15,7 +15,6 @@ import org.json.simple.parser.*;
 public class SFV_Frame_Generator 
 {
 	private BufferedReader b;
-	
 	public SFV_Frame_Generator()
 	{}
 	
@@ -48,6 +47,7 @@ public class SFV_Frame_Generator
 		JSONObject character = (JSONObject) roster.get(name);
 		JSONObject moves = (JSONObject) character.get("moves");
 		
+		/* Parse moves list move by move to get data for each one*/
 		// get normal 
 		JSONObject normals = (JSONObject) moves.get("normal"); // special, super, vskill, throw, command-grab, normal
 		for (Object o2 : normals.values())
@@ -80,6 +80,8 @@ public class SFV_Frame_Generator
 				throw_moves += result;
 			else if (type.equals("super"))
 				super_moves += result;
+			else if (type.equals("taunt"))
+				special_moves += result;
 			else
 			{
 				System.out.println("Could not parse special: " + type);
@@ -87,6 +89,7 @@ public class SFV_Frame_Generator
 			}
 		}
 		
+		// VT1 moves
 		JSONObject VT1 = (JSONObject) moves.get("vtOne");
 		for (Object o3 : VT1.values())
 		{
@@ -94,6 +97,7 @@ public class SFV_Frame_Generator
 			vt1_moves += createMove(move);
 		}
 		
+		// VT2 moves
 		JSONObject VT2 = (JSONObject) moves.get("vtTwo");
 		for (Object o3 : VT2.values())
 		{
@@ -111,7 +115,7 @@ public class SFV_Frame_Generator
 	 * if null returns -, else gets property
 	 * @param o
 	 * @param property
-	 * @return
+	 * @return Property in JSON form if exists, "-" otherwise
 	 */
 	private static String getProperty(JSONObject o, String property)
 	{
@@ -122,13 +126,16 @@ public class SFV_Frame_Generator
 			return (String) o2.toString();
 	}
 	
-	private static String getNumber(String number, String type)
+	private static String getNumber(String number, String type, String crush)
 	{
 		try
 		{
 			Integer num = Integer.parseInt(number);
-			if (type == "counterHit")
-				num += 2;
+			if (type == "counterhit")
+				if (crush != "-")
+					return crush;
+				else
+					num += 2;
 			else if (type == "chip")
 				num = (int) (num * 0.165);
 			else if (type == "ch_damage")
@@ -153,7 +160,13 @@ public class SFV_Frame_Generator
 		}
 	}
 	
-	private String createMove(JSONObject move)
+	/**
+	 * Gets information from JSON file into string formatted row for wiki
+	 * @param move Move in JSON format
+	 * @return String containing move in wiki format
+	 * @throws ParseException 
+	 */
+	private String createMove(JSONObject move) throws ParseException
 	{
 		String moveName = getProperty(move, "moveName");
 		String command = getProperty(move, "plnCmd");
@@ -167,12 +180,24 @@ public class SFV_Frame_Generator
 		String onBlock = getProperty(move, "onBlock");
 		String onHit = getProperty(move, "onHit");
 		String counterHit;
+		String crushAdv = getProperty(move, "crushAdv");
+		
+		/* Handle counter hits*/
+		// if move crushes, has different property than standard OH+2
+		if (crushAdv != "-")
+		{
+			JSONParser parse = new JSONParser();
+			Object json = parse.parse(crushAdv);
+			JSONObject obj = (JSONObject) json;
+			counterHit = getProperty(obj, "ccAdv");
+		}
 		
 		// OH advantage only applies if not a KD
-		if (onHit.equals("KD"))
+		else if (onHit.equals("KD"))
 			counterHit = onHit;
 		else
-			counterHit = getNumber(onHit, "counterhit") + "?";
+			counterHit = getNumber(onHit, "counterhit", crushAdv);
+		
 		
 		String no_rise = getProperty(move, "kd");
 		String quick_rise = getProperty(move, "kdr");
@@ -184,11 +209,11 @@ public class SFV_Frame_Generator
 			if (moveName.contains("LP") || moveName.contains("LK"))
 				chip = "-";
 			else
-				chip = getNumber(damage, "chip");
+				chip = getNumber(damage, "chip", crushAdv);
 		else
-			chip = "CHIP";
-		String ch_damage = getNumber(damage, "ch_damage");
-		String ch_stun = getNumber(stun, "ch_stun");
+			chip = "?";
+		String ch_damage = getNumber(damage, "ch_damage", crushAdv);
+		String ch_stun = getNumber(stun, "ch_stun", crushAdv);
 		String result = row_input(moveName, command, damage, stun, hitLevel, cancel, startup, 
 				active, recovery, onBlock, onHit, counterHit, no_rise, quick_rise, 
 				back_rise, chip, ch_damage, ch_stun);
@@ -290,33 +315,36 @@ public class SFV_Frame_Generator
 			String vt1_moves, String vt2_moves)
 	{
 		// normals - command normals - throws - V-System - specials - super - VT1 - VT2
-		String wiki = "{{SFVFrameDataTableHeader}}\n";
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += normal_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += command_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += throw_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += vt_moves;
-		wiki += vs_moves;
-		wiki += vr_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += special_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += super_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += "{{SFVFrameDataRow|In VT1|||||||||||||||||||||||||||||||||||||||}}\n";
-		wiki += vt1_moves;
-		wiki += "{{SFVFrameDataHeader}}\n";
-		wiki += "{{SFVFrameDataRow|In VT2|||||||||||||||||||||||||||||||||||||||}}\n";
-		wiki += vt2_moves;
-		wiki += "|-\n";
-		wiki += "|}";
-		wiki += "\n=====Notes:=====\n\n";
+		StringBuilder wiki = new StringBuilder();
+		wiki.append("{{SFVFrameDataTableHeader}}\n");
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append(normal_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append(throw_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append(vt_moves);
+		wiki.append(vs_moves);
+		wiki.append(vr_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append(special_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append(super_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append("{{SFVFrameDataRow|In VT1|||||||||||||||||||||||||||||||||||||||}}\n");
+		wiki.append(vt1_moves);
+		wiki.append("{{SFVFrameDataHeader}}\n");
+		wiki.append("{{SFVFrameDataRow|In VT2|||||||||||||||||||||||||||||||||||||||}}\n");
+		wiki.append(vt2_moves);
+		wiki.append("|-\n");
+		wiki.append("|}");
+		wiki.append("\n=====Notes:=====\n\n");
+		wiki.append("* CH Damage and stun is calculated by multiplying base values by 1.2. " + 
+				"For multi-hitting moves this usually only applies to first hit; if only second hit connects it will get the x1.2 benefits.\n" + 
+				"* For Crush Counters: J = Juggle, C = Crumple, KD = Knockdown\n" + 
+				"* Chip damage for normals refers to grey life inflicted\n" + "");
 		
 		// returns formatted data
-		return wiki;
+		return wiki.toString();
 	}
 			
 }
